@@ -1,0 +1,75 @@
+{
+    "concurrentReqs": 8,
+    "apitests": [
+        {
+          "method": "GET",
+          "URL": "https://openlibrary.org/api/books",
+          "params": {"bibkeys": "ISBN:9781781454619",
+                     "format": "json"},
+          "headers": {"Connection": "keep-alive"},
+          "expectedResult": {"ISBN:9781781454": {"bib_key": "ISBN:9781781454619", "info_url": "https://openlibrary.org/books/OL38958464M/Sherlock_Holmes_Escape_Book_Adventure_of_the_Tower_of_London", "preview": "noview", "preview_url": "https://openlibrary.org/books/OL38958464M/Sherlock_Holmes_Escape_Book_Adventure_of_the_Tower_of_London"}}
+        },
+        {
+            "method": "GET",
+            "URL": "https://openlibrary.org/api/books",
+            "params": {"bibkeys": "ISBN:9781645177425",
+                       "format": "json"},
+            "headers": {"Connection": "keep-alive"}
+        },
+        {
+            "method": "GET",
+            "URL": "https://openlibrary.org/api/books",
+            "params": {"bibkeys": "ISBN:9781802792546",
+                       "format": "json"},
+            "headers": {"Connection": "keep-alive"}
+        },
+        {
+            "method": "GET",
+            "URL": "https://api.spacexdata.com/v3/launches/latest",
+            "params": {},
+            "headers": {"Connection": "keep-alive"}
+        },
+        {
+            "method": "GET",
+            "URL": "https://cat-fact.herokuapp.com/facts/",
+            "params": {},
+            "headers": {"Connection": "keep-alive"}
+        },
+        {
+            "method": "GET",
+            "URL": "https://world.openpetfoodfacts.org/api/v0/product/20106836.json",
+            "params": {},
+            "headers": {"Connection": "keep-alive"}
+        },
+        {
+            "method": "GET",
+            "URL": "https://api.coindesk.com/v1/bpi/currentprice.json",
+            "params": {},
+            "headers": {"Connection": "keep-alive"}
+        },
+        {
+            "method": "GET",
+            "URL": "https://api.sunrise-sunset.org/json?lat=36.7201600&lng=-4.4203400",
+            "params": {},
+            "headers": {"Connection": "keep-alive"}
+        },
+        {
+            "method": "GET",
+            "URL": "https://haveibeenpwned.com/api/v2/breaches",
+            "params": {},
+            "headers": {"Connection": "keep-alive"}
+        },
+        {
+            "method": "GET",
+            "URL": "https://ron-swanson-quotes.herokuapp.com/v2/quotes",
+            "params": {},
+            "headers": {"Connection": "keep-alive"}
+        },
+        {
+            "method": "GET",
+            "URL": "https://pokeapi.co/api/v2/pokemon/ditto/",
+            "params": {},
+            "headers": {"Connection": "keep-alive"}
+        }
+    ]
+}
