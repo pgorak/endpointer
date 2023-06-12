@@ -1,5 +1,5 @@
 {
-    "concurrentReqs": 8,
+    "concurrentReqs": 3,
     "apitests": [
         {
           "method": "GET",

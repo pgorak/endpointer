@@ -11,8 +11,6 @@ Features:
 
 To be added:
 - other REST verbs
-- just in time test execution reporting
-- writing test execution report to a file
 
 Usage:
 $python apitests.py

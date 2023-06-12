@@ -1,19 +1,46 @@
 from termcolor import colored 
 
+import csv
+from datetime import datetime
 import verify
 
-def printTestSummary(apiTests, results, duration):
-    results = [list(z) for z in zip(apiTests, results)]
+resultsCsv = []
+
+def printTestSummary(duration):
     howManyFailed = 0
-    for row in results:
-        testResult = verify.verify(row[0], row[1])
-        if not testResult['status']:
+    for row in resultsCsv:
+        if row[1] != 'PASS':
             howManyFailed += 1
-            errorCode = colored(testResult['resultMessage'], 'red')
-            print(row[0], errorCode)
     print('===============================================================')
-    print('Executed ', len(results), ' API tests in ', duration, ' milliseconds.')
+    print('Executed ', len(resultsCsv), ' API tests in ', duration, ' milliseconds.')
     print('===============================================================')
     if howManyFailed > 0 :
         failedMessage = colored(str(howManyFailed) + ' test(s) failed.', 'red')
         print(failedMessage)
+    writeResultsToFile()
+
+async def processTestResults(apiTests, queue, loop):
+    while True:
+        resultTuple = await queue.get()
+        testIndex, result = resultTuple
+        if result == "STOP":
+            break
+        testResult = verify.verify(apiTests[testIndex], result)
+        if not testResult['status']:
+            errorCode = colored(testResult['resultMessage'], 'red')
+            print(apiTests[testIndex], errorCode)
+            resultsCsv.append([apiTests[testIndex], testResult['resultMessage']])
+        else:
+            passMsg = colored('PASS', 'green')
+            print(apiTests[testIndex], passMsg)
+            resultsCsv.append([apiTests[testIndex], 'PASS'])
+        print('')
+
+    loop.stop()
+
+def writeResultsToFile():
+    fileName = 'report-' + datetime.isoformat(datetime.now()).replace(':', '.') + '.csv'
+    with open(fileName, 'w', newline = '') as reportFile:
+            csvWriter = csv.writer(reportFile, delimiter=',')
+            for result in resultsCsv:
+                csvWriter.writerow(result)
